@@ -1,23 +1,21 @@
-name: Run packer build on a template file
-
 on:
-  push:
-    branches:
-        - 'master'
+  push
+
+name: ci
+
 jobs:
-  packer_build:
+  ci:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+    - uses: docker-practice/actions-setup-docker@master
+      with:
+        docker_channel: nightly
+        # this value please see https://github.com/AkihiroSuda/moby-snapshot/releases
+        docker_nightly_version: snapshot-20201008
+    - run: |
+        set -x
 
-      - name: Set up Python 3.
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
+        docker version
 
-      - name: Install test dependencies.
-        run: |
-          pip3 install ansible
-          ansible-playbook install_packer.yml
-      
+        docker run --rm hello-world
      
