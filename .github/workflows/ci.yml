@@ -24,7 +24,7 @@ jobs:
         with:
           command: validate
           arguments: -syntax-only
-          target:  templates/docker/test.json
+          target: templates/docker/test.json
 
       # build artifact
       - name: Build Artifact
