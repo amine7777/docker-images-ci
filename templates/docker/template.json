@@ -1,0 +1,38 @@
+{
+  "variables": {
+    "os_name": "{{ env `OS_NAME` }}",
+    "playbook_name": "{{ env `PLAYBOOK` }}",
+    "image_repository": "amine7777/{{ user `OS_NAME` }}-{{ user `playbook_name` }}",
+    "image_tag": "latest",
+    "upstream_image": "amine7777/{{ user `OS_NAME` }}"
+  },
+  "builders": [
+    {
+      "type": "docker",
+      "image": "{{ user `upstream_image` }}",
+      "commit": true
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "./scripts/{{ user `OS_NAME` }}.sh"
+      ]
+    },
+    {
+      "type": "ansible",
+      "playbook_file": "./playbooks/playbook-{{ user `playbook_name` }}.yml"
+    }
+  ],
+  "post-processors": [
+    [
+      {
+        "type": "docker-tag",
+        "repository": "{{ user `image_repository` }}",
+        "tag": "{{ user `image_tag` }}"
+      },
+      "docker-push"
+    ]
+  ]
+}

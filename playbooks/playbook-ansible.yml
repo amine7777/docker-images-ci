@@ -1,0 +1,12 @@
+- hosts: localhost
+  connection: local
+  become: yes
+  become_user: root
+
+  pre_tasks:
+    - name: Install Ansible Galaxy
+      command: ansible-galaxy install -r amine7777.ansible
+      changed_when: false
+
+  roles:
+    - role: amine7777.ansible

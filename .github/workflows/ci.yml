@@ -23,10 +23,10 @@ jobs:
         distro:
           - centos8
           - centos7
-          - debian10
-          - ubuntu2004
-          - ubuntu1804
-          - fedora32
+          # - debian10
+          # - ubuntu2004
+          # - ubuntu1804
+          # - fedora32
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -39,6 +39,7 @@ jobs:
           arguments: -syntax-only
           target: templates/docker/template.json 
         env:
+          PLAYBOOK: ansible
           ANSIBLE_FORCE_COLOR: '1'
           DISTRO: ${{ matrix.distro }}
           
