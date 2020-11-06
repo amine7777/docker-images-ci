@@ -38,7 +38,7 @@ jobs:
         with:
           command: validate
           arguments: -syntax-only
-          target: templates/docker/template.json 
+          target: templates/docker/template.json  templates/docker/test.json 
         env:
           PLAYBOOK: ansible
           ANSIBLE_FORCE_COLOR: '1'
@@ -49,18 +49,13 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          
-      - name: Add docker 
-        uses: docker/build-push-action@v2
-        
-
+   
       - name: Build Artifact
         uses: operatehappy/packer-github-actions@master
         with:
           command: build
           arguments: "-color=false -on-error=abort"
-          target: templates/docker/template.json
-        env:
+          target: templates/docker/test.json 
           PLAYBOOK: ansible
           ANSIBLE_FORCE_COLOR: '1'
           OS_NAME: ${{ matrix.os_name }}

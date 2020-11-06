@@ -1,0 +1,28 @@
+{
+"builders": [
+    {
+      "type": "docker",
+      "image": "alpine:latest",
+      "commit": true
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "/bin/sh -x '{{.Path}}'",
+      "scripts": [
+        "./scripts/alpine.sh"
+      ]
+    }
+  ],
+  "post-processors": [
+    [
+      {
+        "type": "docker-tag",
+        "repository": "amine7777/alpine-test",
+        "tag": "{{ user `image_tag` }}"
+      },
+      "docker-push"
+    ]
+  ]
+}
