@@ -1,0 +1,6 @@
+- hosts: localhost
+  connection: local
+  vars:
+      packer_version: 1.6.1
+  roles:
+     - amine7777.packer
