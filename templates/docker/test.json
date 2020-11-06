@@ -20,7 +20,7 @@
       {
         "type": "docker-tag",
         "repository": "amine7777/alpine-test",
-        "tag": "{{ user `image_tag` }}"
+        "tag": "latest"
       },
       "docker-push"
     ]
