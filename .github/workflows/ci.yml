@@ -42,7 +42,10 @@ jobs:
           PLAYBOOK: ansible
           ANSIBLE_FORCE_COLOR: '1'
           DISTRO: ${{ matrix.distro }}
-          
+      - name: Install test dependencies.
+        run: |
+          echo $PLAYBOOK
+          echo $DISTRO
 
   # test:
   #   name: docker-images
