@@ -17,7 +17,7 @@
     {
       "type": "shell",
       "scripts": [
-        "./scripts/{{ user `OS_NAME` }}.sh"
+        "./scripts/{{ user `os_name` }}.sh"
       ]
     },
     {
