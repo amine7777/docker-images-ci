@@ -3,13 +3,15 @@
     {
       "type": "docker",
       "image": "alpine:latest",
-      "commit": true
+      "commit": true,
+      "changes": [
+        "ENTRYPOINT /bin/bash"
+        ]
     }
   ],
   "provisioners": [
     {
       "type": "shell",
-      "execute_command": "/bin/sh -x '{{.Path}}'",
       "scripts": [
         "./scripts/alpine.sh"
       ]
