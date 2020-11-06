@@ -2,6 +2,8 @@
   "variables": {
     "os_name": "{{ env `OS_NAME` }}",
     "playbook_name": "{{ env `PLAYBOOK` }}",
+    "docker_username": "{{ env `DOCKER_USER` }}",
+    "docker_password": "{{ env `DOCKER_PASSWORD` }}",
     "image_repository": "amine7777/{{ user `os_name` }}-{{ user `playbook_name` }}",
     "image_tag": "latest",
     "upstream_image": "amine7777/{{ user `os_name` }}"
@@ -33,7 +35,12 @@
         "repository": "{{ user `image_repository` }}",
         "tag": "{{ user `image_tag` }}"
       },
-      "docker-push"
+      {
+        "type": "docker-push",
+        "login": true,
+        "login_username": "{{ user `docker_username`}}",
+        "login_password": "{{ user `docker_password`}}"
+      }
     ]
   ]
 }

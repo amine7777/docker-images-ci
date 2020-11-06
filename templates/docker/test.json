@@ -22,7 +22,12 @@
         "repository": "amine7777/alpine-test",
         "tag": "latest"
       },
-      "docker-push"
+      {
+        "type": "docker-push",
+        "login": true,
+        "login_username": "{{user `docker_username`}}",
+        "login_password": "{{user `docker_password`}}"
+      }
     ]
   ]
 }
