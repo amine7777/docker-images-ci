@@ -13,6 +13,5 @@ jobs:
         uses: riznob/packer-build-action@v1.1
         with:
           templateFile: 'test.json'
-          varFile: ''
           workingDir: '.'
     
