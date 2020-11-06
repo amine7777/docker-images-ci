@@ -1,17 +1,17 @@
-name: Run packer build on a template file
+name: Build an AMI using Packer
 
 on:
   push:
     branches:
-        - 'master'
+      - 'master'
 jobs:
-  packer_build:
+  packer-ami-build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - name: Packer build
-        uses: riznob/packer-build-action@v1.1
+      - uses: actions/checkout@v2
+      - name: Packer AMI Build
+        uses: zmingxie/packer-ami-builder@master
         with:
-          templateFile: 'test.json'
-          workingDir: '.'
-    
+          packerVersion: '1.6.4'
+          packerArgs: 'build test.json'
+          workDir: '.'
