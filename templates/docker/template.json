@@ -22,7 +22,7 @@
       ]
     },
     {
-      "type": "ansible",
+      "type": "ansible-local",
       "playbook_file": "./playbooks/playbook-{{ user `playbook_name` }}.yml"
     }
   ],
