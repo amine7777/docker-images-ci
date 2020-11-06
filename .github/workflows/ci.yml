@@ -22,30 +22,22 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      # validate templates
-      - name: Validate Template
-        uses: operatehappy/packer-github-actions@master
-        with:
-          command: validate
-          arguments: -syntax-only
-          target: templates/docker/test.json 
-        env:
-          PLAYBOOK: ansible
-          ANSIBLE_FORCE_COLOR: '1'
-          OS_NAME: ${{ matrix.os_name }}
-
-      - name: Set up Python 3.
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
-
-      - name: Install test dependencies.
-        run: pip3 install docker
+      # # validate templates
+      # - name: Validate Template
+      #   uses: operatehappy/packer-github-actions@master
+      #   with:
+      #     command: validate
+      #     arguments: -syntax-only
+      #     target: templates/docker/template.json 
+      #   env:
+      #     PLAYBOOK: ansible
+      #     ANSIBLE_FORCE_COLOR: '1'
+      #     OS_NAME: ${{ matrix.os_name }}
 
       - name: Build Artifact
         uses: santisaez/packer-action@v1
         with:
-          template: templates/docker/test.json
+          template: templates/docker/template.json
         env:
           PLAYBOOK: ansible
           ANSIBLE_FORCE_COLOR: '1'
