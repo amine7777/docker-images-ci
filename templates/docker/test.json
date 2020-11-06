@@ -1,35 +1,33 @@
 {
-"builders": [
-    {
-      "type": "docker",
-      "image": "alpine:latest",
-      "commit": true,
-      "changes": [
-        "ENTRYPOINT /bin/sh"
-        ]
-    }
-  ],
-  "provisioners": [
-    {
-      "type": "shell",
-      "scripts": [
-        "./scripts/alpine.sh"
-      ]
-    }
-  ],
-  "post-processors": [
-    [
+    "variables": {
+      "image_repository": "amine7777/centos-ansible",
+      "image_tag": "latest",
+      "upstream_image": "centos:7"
+    },
+    "builders": [
       {
-        "type": "docker-tag",
-        "repository": "amine7777/alpine-test",
-        "tag": "latest"
-      },
-      {
-        "type": "docker-push",
-        "login": true,
-        "login_username": "{{user `docker_username`}}",
-        "login_password": "{{user `docker_password`}}"
+        "type": "docker",
+        "image": "{{ user `upstream_image` }}",
+        "commit": true
       }
+    ],
+    "provisioners": [
+      {
+        "type": "shell",
+        "scripts": [
+          "./scripts/centos7.sh"
+        ]
+      }
+    ],
+    "post-processors": [
+      [
+        {
+          "type": "docker-tag",
+          "repository": "{{ user `image_repository` }}",
+          "tag": "{{ user `image_tag` }}"
+        },
+        "docker-push"
+      ]
     ]
-  ]
-}
+  }
+  

@@ -28,7 +28,7 @@ jobs:
         with:
           command: validate
           arguments: -syntax-only
-          target: templates/docker/template.json 
+          target: templates/docker/test.json 
         env:
           PLAYBOOK: ansible
           ANSIBLE_FORCE_COLOR: '1'
@@ -47,7 +47,7 @@ jobs:
         with:
           command: build
           arguments: "-color=false -on-error=abort -debug"
-          target: templates/docker/template.json
+          target: templates/docker/test.json
         env:
           PLAYBOOK: ansible
           ANSIBLE_FORCE_COLOR: '1'
