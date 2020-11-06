@@ -1,10 +1,10 @@
 on:
   push
 
-name: ci
+name: packer
 
 jobs:
-  ci:
+  packer:
     runs-on: ubuntu-latest
     steps:
     - uses: docker-practice/actions-setup-docker@master
@@ -12,10 +12,20 @@ jobs:
         docker_channel: nightly
         # this value please see https://github.com/AkihiroSuda/moby-snapshot/releases
         docker_nightly_version: snapshot-20201008
-    - run: |
-        set -x
+    
+  # validate templates
+    - name: Validate Template
+      uses: operatehappy/packer-github-actions@master
+      with:
+        command: validate
+        arguments: -syntax-only
+        target: templates/docker/template.json
 
-        docker version
-
-        docker run --rm hello-world
+    # build artifact
+    - name: Build Artifact
+      uses: operatehappy/packer-github-actions@master
+      with:
+        command: build
+        arguments: "-color=false -on-error=abort"
+        target: templates/docker/template.json
      
