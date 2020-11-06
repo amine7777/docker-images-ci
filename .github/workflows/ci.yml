@@ -24,7 +24,7 @@ jobs:
         with:
           command: validate
           arguments: -syntax-only
-          target: templates/docker/test.json
+          target: test.json
 
       # build artifact
       - name: Build Artifact
@@ -32,63 +32,4 @@ jobs:
         with:
           command: build
           arguments: "-color=false -on-error=abort"
-          target: templates/docker/test.json
-
-
-
-
-
-
-
-
-
-
-
-
-
-# ---
-# name: CI
-# 'on':
-#   pull_request:
-#   push:
-#     branches:
-#       - master
-# jobs:
-#   packer:
-#     runs-on: ubuntu-latest
-#     name: packer
-#     strategy:
-#       matrix:
-#         os_name:
-#           - centos8
-#           - centos7
-#           # - debian10
-#           # - ubuntu2004
-#           # - ubuntu1804
-#           # - fedora32
-#     steps:
-#       - name: Checkout Repository
-#         uses: actions/checkout@v2
-
-#       # # validate templates
-#       # - name: Validate Template
-#       #   uses: operatehappy/packer-github-actions@master
-#       #   with:
-#       #     command: validate
-#       #     arguments: -syntax-only
-#       #     target: templates/docker/template.json 
-#       #   env:
-#       #     PLAYBOOK: ansible
-#       #     ANSIBLE_FORCE_COLOR: '1'
-#       #     OS_NAME: ${{ matrix.os_name }}
-
-#       - name: Build Artifact
-#         uses: santisaez/packer-action@v1
-#         with:
-#           template: templates/docker/template.json
-#         env:
-#           PLAYBOOK: ansible
-#           ANSIBLE_FORCE_COLOR: '1'
-#           OS_NAME: ${{ matrix.os_name }}
-#           DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-#           DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
+          target: test.json
