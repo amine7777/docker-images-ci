@@ -16,6 +16,7 @@
   "provisioners": [
     {
       "type": "shell",
+      "execute_command": "/bin/sh -x '{{.Path}}'",
       "scripts": [
         "./scripts/{{ user `os_name` }}.sh"
       ]
