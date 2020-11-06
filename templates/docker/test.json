@@ -5,7 +5,7 @@
       "image": "alpine:latest",
       "commit": true,
       "changes": [
-        "ENTRYPOINT /bin/bash"
+        "ENTRYPOINT /bin/sh"
         ]
     }
   ],
