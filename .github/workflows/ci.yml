@@ -43,11 +43,9 @@ jobs:
         run: pip3 install docker
 
       - name: Build Artifact
-        uses: operatehappy/packer-github-actions@master
+        uses: santisaez/packer-action@v1
         with:
-          command: build
-          arguments: "-color=false -on-error=abort -debug"
-          target: templates/docker/test.json
+          template: templates/docker/test.json
         env:
           PLAYBOOK: ansible
           ANSIBLE_FORCE_COLOR: '1'
