@@ -34,6 +34,14 @@ jobs:
           ANSIBLE_FORCE_COLOR: '1'
           OS_NAME: ${{ matrix.os_name }}
 
+      - name: Set up Python 3.
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install test dependencies.
+        run: pip3 install docker
+
       - name: Build Artifact
         uses: operatehappy/packer-github-actions@master
         with:
