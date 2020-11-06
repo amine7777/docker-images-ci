@@ -13,5 +13,5 @@ jobs:
         uses: riznob/packer-build-action@v1.1
         with:
           templateFile: 'test.json'
-          workingDir: './templates/docker'
+          workingDir: 'templates/docker'
     
