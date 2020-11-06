@@ -2,9 +2,9 @@
   "variables": {
     "os_name": "{{ env `OS_NAME` }}",
     "playbook_name": "{{ env `PLAYBOOK` }}",
-    "image_repository": "amine7777/{{ env `OS_NAME` }}-{{ env `playbook_name` }}",
+    "image_repository": "amine7777/{{ user `os_name` }}-{{ user `playbook_name` }}",
     "image_tag": "latest",
-    "upstream_image": "amine7777/{{ env `OS_NAME` }}"
+    "upstream_image": "amine7777/{{ user `os_name` }}"
   },
   "builders": [
     {
