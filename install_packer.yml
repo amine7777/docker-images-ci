@@ -1,11 +1,11 @@
 - hosts: localhost
   connection: local
   vars:
-      packer_version: 1.6.1
+    packer_version: 1.6.1
   pre_tasks:
     - name: Install Ansible Galaxy
       command: ansible-galaxy install -r amine7777.packer amine7777.docker
       changed_when: false
   roles:
-     - role: amine7777.docker
-     - role: amine7777.packer
+    - amine7777.docker
+    - amine7777.packer
