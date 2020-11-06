@@ -20,7 +20,7 @@ jobs:
     name: packer
     strategy:
       matrix:
-        distro:
+        os_name:
           - centos8
           - centos7
           # - debian10
@@ -41,11 +41,19 @@ jobs:
         env:
           PLAYBOOK: ansible
           ANSIBLE_FORCE_COLOR: '1'
-          DISTRO: ${{ matrix.distro }}
-      - name: Install test dependencies.
-        run: |
-          echo $PLAYBOOK
-          echo $DISTRO
+          OS_NAME: ${{ matrix.os_name }}
+
+      - name: Build Artifact
+        uses: operatehappy/packer-github-actions@master
+        with:
+          command: build
+          arguments: "-color=false -on-error=abort"
+          target: templates/docker/template.json
+        env:
+          PLAYBOOK: ansible
+          ANSIBLE_FORCE_COLOR: '1'
+          OS_NAME: ${{ matrix.os_name }}
+
 
   # test:
   #   name: docker-images
