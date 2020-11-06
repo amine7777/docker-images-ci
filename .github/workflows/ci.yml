@@ -1,4 +1,3 @@
----
 name: Run packer build on a template file
 
 on:
@@ -9,10 +8,9 @@ jobs:
   packer_build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v1
       - name: Packer build
-        uses: riznob/packer-build-action@v1.1
+        uses: enr0s/packer-qemu-action@v1.0
         with:
           templateFile: 'test.json'
-          varFile: 'packer-vars.json'
           workingDir: '.'
