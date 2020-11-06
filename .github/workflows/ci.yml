@@ -18,7 +18,15 @@ jobs:
   packer:
     runs-on: ubuntu-latest
     name: packer
-
+    strategy:
+      matrix:
+        distro:
+          - centos8
+          - centos7
+          - debian10
+          - ubuntu2004
+          - ubuntu1804
+          - fedora32
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -29,7 +37,11 @@ jobs:
         with:
           command: validate
           arguments: -syntax-only
-          target: templates/docker/template-alpine.json templates/docker/template-centos.json templates/docker/template-ubuntu.json
+          target: templates/docker/template.json 
+        env:
+          ANSIBLE_FORCE_COLOR: '1'
+          DISTRO: ${{ matrix.distro }}
+          
 
   # test:
   #   name: docker-images
