@@ -7,12 +7,18 @@ jobs:
   packer:
     runs-on: ubuntu-latest
     steps:
+    
+    - name: Check out the codebase.
+      uses: actions/checkout@v2
+      
     - uses: docker-practice/actions-setup-docker@master
       with:
         docker_channel: nightly
         # this value please see https://github.com/AkihiroSuda/moby-snapshot/releases
         docker_nightly_version: snapshot-20201008
-    
+
+    - run: ls -la
+
   # validate templates
     - name: Validate Template
       uses: operatehappy/packer-github-actions@master
