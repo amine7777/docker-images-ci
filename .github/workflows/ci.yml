@@ -8,9 +8,16 @@ jobs:
   packer_build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - name: Packer build
-        uses: enr0s/packer-qemu-action@v1.0
+      - uses: actions/checkout@v2
+
+      - name: Set up Python 3.
+        uses: actions/setup-python@v2
         with:
-          templateFile: 'test.json'
-          workingDir: '.'
+          python-version: '3.x'
+
+      - name: Install test dependencies.
+        run: |
+          pip3 install ansible
+          ansible-playbook install_packer.yml
+      
+     
