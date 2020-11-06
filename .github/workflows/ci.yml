@@ -15,6 +15,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+
   packer:
     runs-on: ubuntu-latest
     name: packer
@@ -42,6 +43,9 @@ jobs:
           PLAYBOOK: ansible
           ANSIBLE_FORCE_COLOR: '1'
           OS_NAME: ${{ matrix.os_name }}
+
+      - name: Add docker 
+        uses: docker/build-push-action@v2
 
       - name: Build Artifact
         uses: operatehappy/packer-github-actions@master
