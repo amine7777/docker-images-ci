@@ -1,17 +1,31 @@
-name: Build an AMI using Packer
+---
+
+name: Packer
 
 on:
   push:
-    branches:
-      - 'master'
+
 jobs:
-  packer-ami-build:
+  packer:
     runs-on: ubuntu-latest
+    name: packer
+
     steps:
-      - uses: actions/checkout@v2
-      - name: Packer AMI Build
-        uses: zmingxie/packer-ami-builder@master
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      # validate templates
+      - name: Validate Template
+        uses: operatehappy/packer-github-actions@master
         with:
-          packerVersion: '1.6.4'
-          packerArgs: 'build test.json'
-          workDir: '.'
+          command: validate
+          arguments: -syntax-only
+          target: test.json
+
+      # build artifact
+      - name: Build Artifact
+        uses: operatehappy/packer-github-actions@master
+        with:
+          command: build
+          arguments: "-color=false -on-error=abort"
+          target: test.json
