@@ -21,7 +21,7 @@
     {
       "type": "shell",
       "execute_command": "/bin/sh -x '{{.Path}}'",
-      "script": "{{ user `script_path` }}"
+      "scripts": ["{{ user `script_path` }}"]
     },
     {
       "type": "ansible-local",
