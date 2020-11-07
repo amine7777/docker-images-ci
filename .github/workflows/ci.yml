@@ -34,11 +34,12 @@ jobs:
 
     # build artifact
     - name: Build Artifact
-      uses: operatehappy/packer-github-actions@master
-      with:
-        command: build
-        arguments: "-color=false -on-error=abort"
-        target: templates/docker/template.json
+      run: |
+        export VER="1.5.6"
+        wget https://releases.hashicorp.com/packer/${VER}/packer_${VER}_linux_amd64.zip
+        apt install unzip
+        mv packer /usr/local/bin
+        packer --version
       env:
         PLAYBOOK: ansible
         ANSIBLE_FORCE_COLOR: '1'
