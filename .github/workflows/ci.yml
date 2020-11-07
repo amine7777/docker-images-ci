@@ -6,8 +6,13 @@ name: packer
 jobs:
   packer:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os_name:
+          - centos8
+          - centos7
     steps:
-    
+
     - name: Check out the codebase.
       uses: actions/checkout@v2
       
@@ -34,4 +39,10 @@ jobs:
         command: build
         arguments: "-color=false -on-error=abort"
         target: templates/docker/template.json
+      env:
+        PLAYBOOK: ansible
+        ANSIBLE_FORCE_COLOR: '1'
+        OS_NAME: ${{ matrix.os_name }}
+
+
      
