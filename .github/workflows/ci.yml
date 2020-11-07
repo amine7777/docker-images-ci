@@ -33,19 +33,20 @@ jobs:
     # build artifact
     - name: Build Artifact
       run: |
+        export PLAYBOOK: ansible
+        export PLAYBOOK_PATH: "./playbooks/playbook-ansible.yml"
+        export ANSIBLE_FORCE_COLOR: '1'
+        export OS_NAME: ${{ matrix.os_name }}
+        export SCRIPT_PATH: "./scripts/${{ matrix.os_name }}.sh"
+        export DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+        export DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
         export VER="1.6.4"
         sudo wget https://releases.hashicorp.com/packer/${VER}/packer_${VER}_linux_amd64.zip
         sudo apt install unzip
         unzip packer_${VER}_linux_amd64.zip
         sudo mv packer /usr/local/bin
         sudo packer build -debug templates/docker/template.json
-      env:
-        PLAYBOOK: ansible
-        PLAYBOOK_PATH: "./playbooks/playbook-ansible.yml"
-        ANSIBLE_FORCE_COLOR: '1'
-        OS_NAME: ${{ matrix.os_name }}
-        SCRIPT_PATH: "./scripts/${{ matrix.os_name }}.sh"
-        DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
+      
+       
 
      
