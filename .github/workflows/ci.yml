@@ -25,7 +25,7 @@ jobs:
     - run: env
       env:
         PLAYBOOK: ansible
-        PLAYBOOK_PATH: "./playbooks/playbook-${{ PLAYBOOK }}.yml"
+        PLAYBOOK_PATH: "./playbooks/playbook-${{ env.PLAYBOOK }}.yml"
         ANSIBLE_FORCE_COLOR: '1'
         OS_NAME: ${{ matrix.os_name }}
         SCRIPT_PATH: "./scripts/${{ matrix.os_name }}.sh"
