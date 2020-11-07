@@ -22,31 +22,31 @@ jobs:
         # this value please see https://github.com/AkihiroSuda/moby-snapshot/releases
         docker_nightly_version: snapshot-20201008
 
-    - run: ls -la
+    - run: env
 
-  # validate templates
-    - name: Validate Template
-      uses: operatehappy/packer-github-actions@master
-      with:
-        command: validate
-        arguments: -syntax-only
-        target: templates/docker/template.json
+  # # validate templates
+  #   - name: Validate Template
+  #     uses: operatehappy/packer-github-actions@master
+  #     with:
+  #       command: validate
+  #       arguments: -syntax-only
+  #       target: templates/docker/template.json
 
-    # build artifact
-    - name: Build Artifact
-      run: |
-        export VER="1.6.4"
-        sudo wget https://releases.hashicorp.com/packer/${VER}/packer_${VER}_linux_amd64.zip
-        sudo apt install unzip
-        unzip packer_${VER}_linux_amd64.zip
-        sudo mv packer /usr/local/bin
-        sudo packer build templates/docker/template.json
-      env:
-        PLAYBOOK: ansible
-        ANSIBLE_FORCE_COLOR: '1'
-        OS_NAME: ${{ matrix.os_name }}
-        DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
+  #   # build artifact
+  #   - name: Build Artifact
+  #     run: |
+  #       export VER="1.6.4"
+  #       sudo wget https://releases.hashicorp.com/packer/${VER}/packer_${VER}_linux_amd64.zip
+  #       sudo apt install unzip
+  #       unzip packer_${VER}_linux_amd64.zip
+  #       sudo mv packer /usr/local/bin
+  #       sudo packer build templates/docker/template.json
+  #     env:
+  #       PLAYBOOK: ansible
+  #       ANSIBLE_FORCE_COLOR: '1'
+  #       OS_NAME: ${{ matrix.os_name }}
+  #       DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+  #       DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
 
 
      
