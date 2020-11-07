@@ -38,7 +38,7 @@ jobs:
         sudo apt install unzip
         unzip packer_${VER}_linux_amd64.zip
         sudo mv packer /usr/local/bin
-        sudo packer build templates/docker/template.json
+        sudo packer build -debug templates/docker/template.json
       env:
         PLAYBOOK: ansible
         PLAYBOOK_PATH: "./playbooks/playbook-ansible.yml"
