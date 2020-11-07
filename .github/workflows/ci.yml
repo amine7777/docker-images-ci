@@ -16,17 +16,19 @@ jobs:
     - name: Check out the codebase.
       uses: actions/checkout@v2
       
-    - uses: docker-practice/actions-setup-docker@master
-      with:
-        docker_channel: nightly
-        # this value please see https://github.com/AkihiroSuda/moby-snapshot/releases
-        docker_nightly_version: snapshot-20201008
+    # - uses: docker-practice/actions-setup-docker@master
+    #   with:
+    #     docker_channel: nightly
+    #     # this value please see https://github.com/AkihiroSuda/moby-snapshot/releases
+    #     docker_nightly_version: snapshot-20201008
 
     - run: env
       env:
         PLAYBOOK: ansible
+        PLAYBOOK_PATH: "./playbooks/playbook-${PLAYBOOK}.yml"
         ANSIBLE_FORCE_COLOR: '1'
         OS_NAME: ${{ matrix.os_name }}
+        SCRIPT_PATH: "./scripts/${{ matrix.os_name }}.sh"
         DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
 

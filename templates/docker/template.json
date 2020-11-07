@@ -1,7 +1,9 @@
 {
   "variables": {
     "os_name": "{{ env `OS_NAME` }}",
+    "script_path": "{{ env `SCRIPT_PATH` }}",
     "playbook_name": "{{ env `PLAYBOOK` }}",
+    "playbook_path": "{{ env `PLAYBOOK_PATH` }}",
     "docker_username": "{{ env `DOCKER_USER` }}",
     "docker_password": "{{ env `DOCKER_PASSWORD` }}",
     "image_repository": "amine7777/{{ user `os_name` }}-{{ user `playbook_name` }}",
@@ -19,13 +21,11 @@
     {
       "type": "shell",
       "execute_command": "/bin/sh -x '{{.Path}}'",
-      "scripts": [
-        "{{ user `os_name` }}"
-      ]
+      "script": "{{ user `script_path` }}"
     },
     {
       "type": "ansible-local",
-      "playbook_file": "./playbooks/playbook-{{ user `playbook_name` }}.yml"
+      "playbook_file": "{{ user `playbook_path` }}"
     }
   ],
   "post-processors": [
