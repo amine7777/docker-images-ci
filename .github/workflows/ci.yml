@@ -35,11 +35,12 @@ jobs:
     # build artifact
     - name: Build Artifact
       run: |
-        sudo export VER="1.5.6"
+        export VER="1.5.6"
         sudo wget https://releases.hashicorp.com/packer/${VER}/packer_${VER}_linux_amd64.zip
         sudo apt install unzip
         sudo mv packer /usr/local/bin
         sudo packer --version
+        sudo docker info
       env:
         PLAYBOOK: ansible
         ANSIBLE_FORCE_COLOR: '1'
