@@ -43,6 +43,8 @@ jobs:
         PLAYBOOK: ansible
         ANSIBLE_FORCE_COLOR: '1'
         OS_NAME: ${{ matrix.os_name }}
+        DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
 
 
      
