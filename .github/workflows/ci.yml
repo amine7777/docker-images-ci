@@ -23,6 +23,14 @@ jobs:
         docker_nightly_version: snapshot-20201008
 
     - run: env
+      env:
+        PLAYBOOK: ansible
+        ANSIBLE_FORCE_COLOR: '1'
+        OS_NAME: ${{ matrix.os_name }}
+        DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
+
+
 
   # # validate templates
   #   - name: Validate Template
