@@ -38,6 +38,7 @@ jobs:
         export VER="1.5.6"
         sudo wget https://releases.hashicorp.com/packer/${VER}/packer_${VER}_linux_amd64.zip
         sudo apt install unzip
+        unzip packer_${VER}_linux_amd64.zip
         sudo mv packer /usr/local/bin
         sudo packer --version
         sudo docker info
